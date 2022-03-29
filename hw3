@@ -1,0 +1,41 @@
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define _CRT_NO_SECURE_WARNINGS
+
+int main()
+{
+    //사용자로 부터 몇 명인지 입력 받는다
+    int n; 
+    printf("Please enter the number of people: ");
+    scanf_s("%d", &n);
+
+    int max[5000]; //n의 최대가 5000이기 때문에
+    int i, j;
+
+    srand((unsigned int)time(NULL)); //실행될 때마다 무작위 시드값을 랜덤으로 줌 ---> 실행될때 마다 다른 결과
+
+    //난수 생성
+    for (i = 0; i < n; i++)
+    {
+        max[i] = rand() % n + 1;
+        //난수 중복 제거
+        for (j = 0; j < i; j++)
+        {
+            if (max[i] == max[j])
+            {
+                i--; //중복 발생 시 i번째 숫자를 다시 뽑음
+                break;
+            }
+        }
+    }
+
+    //출력용
+    for (i = 0; i < n; i++) 
+    {
+        printf("%d ", max[i]);
+    }
+
+    printf("\n");
+    return 0;
+}
